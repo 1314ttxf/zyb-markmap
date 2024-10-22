@@ -1194,10 +1194,13 @@
         this.fontSize1=opts.fontSize1
         this.fontSize2=opts.fontSize2
         this.fontSize3=opts.fontSize3
-        this.initZoom=false //初次是否自适应缩放
         this.handleZoom = (e) => {
           const { transform } = e;
-          if(!this.initZoom) transform.k=1
+          if(!e.sourceEvent){
+            transform.k=1
+            transform.x=30
+            // transform.y=1
+          } 
           this.g.attr("transform", transform);
         };
         this.handlePan = (e) => {
@@ -1293,13 +1296,17 @@
           item.children = (_a = item.children) == null ? void 0 : _a.map((child) => ({ ...child }));
           nodeId += 1;
           const fontSize=depth==1?this.fontSize1:depth==2?this.fontSize2:this.fontSize3
+          let style="font-size:"+fontSize;
+          if (depth==1) {
+            style+=";font-weight: bold;"
+          }
           const group = mountDom(
             /* @__PURE__ */ jsx(
               "div",
               {
                 className: "markmap-foreign markmap-foreign-testing-max",
                 style: groupStyle,
-                children: /* @__PURE__ */ jsx("div", { dangerouslySetInnerHTML: { __html: item.content },style:"font-size:"+fontSize })
+                children: /* @__PURE__ */ jsx("div", { dangerouslySetInnerHTML: { __html: item.content },style:style })
               }
             )
           );
@@ -1385,7 +1392,6 @@
         }
       }
       setData(data, opts) {
-        this.initZoom=false;
         if (opts)
           this.setOptions(opts);
         if (data)
@@ -1395,9 +1401,6 @@
         this.initializeData(this.state.data);
         this.updateStyle();
         this.renderData();
-        setTimeout(()=>{
-          this.initZoom=true;
-        },1000)
       }
       renderData(originData) {
         if (!this.state.data)
