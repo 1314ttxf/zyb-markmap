@@ -379,13 +379,14 @@
     function deriveOptions(jsonOptions) {
       const derivedOptions = {};
       const options = { ...jsonOptions };
-      const { color, colorFreezeLevel,fontSize1='16px',fontSize2='16px',fontSize3='16px' } = options;
+      const { color, colorFreezeLevel,fontSize1='16px',fontSize2='16px',fontSize3='16px',needScale } = options;
       // fontSize1:,//一级标题字体大小
       // fontSize2:'12px',//二级标题字体大小
       // fontSize3:'12px',//内容字体大小
       derivedOptions.fontSize1=fontSize1;
       derivedOptions.fontSize2=fontSize2;
       derivedOptions.fontSize3=fontSize3;
+      derivedOptions.needScale=needScale;
       if ((color == null ? void 0 : color.length) === 1) {
         const solidColor = color[0];
         derivedOptions.color = () => solidColor;
@@ -1194,7 +1195,7 @@
         this.fontSize1=opts.fontSize1
         this.fontSize2=opts.fontSize2
         this.fontSize3=opts.fontSize3
-        this.needScale=false
+        this.needScale=opts.needScale
         this.handleZoom = (e) => {
           const { transform } = e;
           this.g.attr("transform", transform);
@@ -1585,7 +1586,7 @@
        * Fit the content to the viewport.
        */
       async fit(maxScale = this.options.maxInitialScale,needScale=false) {
-        this.needScale=needScale
+        // this.needScale=needScale
         const svgNode = this.svg.node();
         const { width: offsetWidth, height: offsetHeight } = svgNode.getBoundingClientRect();
         const { fitRatio } = this.options;
