@@ -1194,9 +1194,14 @@
         this.fontSize1=opts.fontSize1
         this.fontSize2=opts.fontSize2
         this.fontSize3=opts.fontSize3
+        this.needScale=false
         this.handleZoom = (e) => {
           const { transform } = e;
-          if(!e.sourceEvent){
+          this.g.attr("transform", transform);
+        };
+        this.handleZoom = (e) => {
+          const { transform } = e;
+          if(!e.sourceEvent&&!this.needScale){
             transform.k=1
             transform.x=30
             // transform.y=1
@@ -1579,7 +1584,8 @@
       /**
        * Fit the content to the viewport.
        */
-      async fit(maxScale = this.options.maxInitialScale) {
+      async fit(maxScale = this.options.maxInitialScale,needScale=false) {
+        this.needScale=needScale
         const svgNode = this.svg.node();
         const { width: offsetWidth, height: offsetHeight } = svgNode.getBoundingClientRect();
         const { fitRatio } = this.options;

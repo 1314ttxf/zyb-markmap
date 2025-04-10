@@ -17,7 +17,7 @@ async function loadScriptsInOrder() {
     // await loadScript('./js/markmap-toolbar.js');
     console.log('All scripts loaded successfully');
     setupWebFontConfig();
-    draw(data)
+    // draw(data)
   } catch (error) {
     console.error('Error loading scripts:', error);
   }
@@ -165,6 +165,17 @@ loadScriptsInOrder();
     for (let index = 0; index < 100; index++) {
       colorArr.push(...colorLoopArr)
     }
+    window.addEventListener('message', (event) => {
+      // if (event.origin !== 'http://localhost:8011') return; // 验证来源
+    
+      const { type, payload } = event.data;
+      if (type === 'draw') {
+        window.draw(payload);
+      }
+      if (type === 'export') {
+        window.exportToPNG();
+      }
+    });
     window.draw=function draw(h, u = {
       colorFreezeLevel: 2,
       initialExpandLevel: 3,
@@ -190,7 +201,7 @@ loadScriptsInOrder();
       console.info(root, features, 'root, features',(g.deriveOptions)(u))
       if (window.mm) window.mm.destroy()
       window.mm = g.Markmap.create("svg#mindmap", (g.deriveOptions)(u), root)
-       
+    
     }
     
     
