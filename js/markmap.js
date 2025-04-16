@@ -106,7 +106,7 @@ loadScriptsInOrder();
       fontSize2:'12px',//二级标题字体大小
       fontSize3:'12px',//内容字体大小
       color:["rgba(0,106,248,0.5)"],
-    }) {
+    },isExport=false) {
       data=h
       const g = window.markmap;
       const {
@@ -119,8 +119,13 @@ loadScriptsInOrder();
         features
       } = transformer.transform(h)
       console.info(root, features, 'root, features',(g.deriveOptions)(u))
-      if (window.mm) window.mm.destroy()
-      window.mm = g.Markmap.create("svg#mindmap", (g.deriveOptions)(u), root)
+      if (isExport) {
+        if (window.mm2) window.mm2.destroy()
+          window.mm2 = g.Markmap.create("svg#mindmap2", (g.deriveOptions)(u), root)
+      }else{
+        if (window.mm) window.mm.destroy()
+          window.mm = g.Markmap.create("svg#mindmap", (g.deriveOptions)(u), root)
+      }
     
     }
     window.reDraw=function reDraw(){
@@ -131,12 +136,12 @@ loadScriptsInOrder();
         spacingVertical: 20,
         nodeMinHeight:14,
         maxWidth:240,
-        needScale:true,
+        // needScale:true,
         fontSize1:'14px',//一级标题字体大小
         fontSize2:'12px',//二级标题字体大小
         fontSize3:'12px',//内容字体大小
         color:["rgba(0,106,248,0.5)"],
-      })
+      },true)
     }
     
     

@@ -11,12 +11,21 @@ window.exportToPNG = async function exportToPNG() {
     window.reDraw()
     // window.mm.fit(2, true)
     await sleep(1000)
+    const mindmapElement = document.getElementById("mindmap2");
+    const g = mindmapElement.querySelector("g");
+    const bbox = g.getBBox();
+    const height=bbox.height+100
+    const width=bbox.width+100
+    mindmapElement.style.width=width+'px'
+    mindmapElement.style.height=height+'px'
+    window.reDraw()
+    await sleep(1000)
     // 获取包含 SVG 的容器
-    const element = document.getElementById("body");
+    const element = document.getElementById("export");
 
     html2canvas(element, {
         // 使用更高的 scale 提升清晰度
-        scale: 1,
+        scale: 2,
         logging: true, // 开启日志排查问题
         // 允许跨域内容（如果 SVG 包含外部资源）
         useCORS: true,
