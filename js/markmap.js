@@ -133,9 +133,9 @@ loadScriptsInOrder();
         colorFreezeLevel: 2,
         // initialExpandLevel: 3,
         spacingHorizontal: 30,
-        spacingVertical: 20,
+        spacingVertical: 8,
         nodeMinHeight:14,
-        maxWidth:240,
+        maxWidth:800,
         // needScale:true,
         fontSize1:'14px',//一级标题字体大小
         fontSize2:'12px',//二级标题字体大小

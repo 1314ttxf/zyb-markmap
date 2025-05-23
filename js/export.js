@@ -22,11 +22,11 @@ window.exportToPNG = async function exportToPNG() {
     await sleep(1000)
     // 获取包含 SVG 的容器
     const element = document.getElementById("export");
-
+    
     html2canvas(element, {
         // 使用更高的 scale 提升清晰度
         scale: 2,
-        logging: true, // 开启日志排查问题
+        logging: false, // 开启日志排查问题
         // 允许跨域内容（如果 SVG 包含外部资源）
         useCORS: true,
         onclone: function(clonedDoc) {

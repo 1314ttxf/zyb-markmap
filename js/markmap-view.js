@@ -1514,7 +1514,7 @@
               const clone = d.data.state.el.cloneNode(true);
               this.replaceWith(clone);
               return clone;
-            }).attr("xmlns", "http://www.w3.org/1999/xhtml").attr("style", (d) => {
+            }).attr("style", (d) => {
               let style = `color: ${d.data.state.depth > 1000 ? color(d.data) : '#333333'};`;
               // if (d.data.state.depth <3) {
               //   style += `font-weight: bold;`;
