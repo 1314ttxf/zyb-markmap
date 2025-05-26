@@ -25,7 +25,7 @@ window.exportToPNG = async function exportToPNG() {
     
     html2canvas(element, {
         // 使用更高的 scale 提升清晰度
-        scale: 2,
+        scale: 1,
         logging: false, // 开启日志排查问题
         // 允许跨域内容（如果 SVG 包含外部资源）
         useCORS: true,
