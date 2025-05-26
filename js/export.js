@@ -19,7 +19,7 @@ window.exportToPNG = async function exportToPNG() {
     mindmapElement.style.width=width+'px'
     mindmapElement.style.height=height+'px'
     window.reDraw()
-    await sleep(1000)
+    await sleep(height>10000?2000:1000)
     // 获取包含 SVG 的容器
     const element = document.getElementById("export");
     
