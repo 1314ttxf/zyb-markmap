@@ -1306,6 +1306,9 @@
           if (depth==1) {
             style+=";font-weight: bold;"
           }
+          if (depth==2) {
+            style+=";font-weight: 545;"
+          }
           const group = mountDom(
             /* @__PURE__ */ jsx(
               "div",
